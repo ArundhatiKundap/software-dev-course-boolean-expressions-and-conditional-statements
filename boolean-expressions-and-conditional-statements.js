@@ -1,52 +1,54 @@
-/*
-
-Objective:
-You will practice creating and combining boolean expressions
-to drive logic and outcomes in you program.
-
-Instructions:
-If you are not familiar with the concept of a text-based adventure game,
-let's set the scene...
-Example: "You wake up in a dark forest. There are two paths ahead of you:
-one leading to the mountains and one to a village.
-Your choices will determine your fate!"
-
-Define the Requirements: You must:
-  - Write conditional statements to handle player choices.
-  - Use boolean expressions to combine multiple conditions.
-  - Include at least one use of logical operators (&&, ||, !).
-
-Starter Code:
-  - Run the following command in your terminal to install the readline-sync module:
-    npm install readline-sync
-
-Paste the following code into your editor:
-
-*/
-
 const readline = require('readline-sync');
 
-const hasTorch = true;
-const hasMap = false;
+let hasTorch = true;
+let hasMap = false;
+let hasSword = true;
+let hasCompass = true;
 
 console.log("You see two paths: one leads to the mountains, the other to the village.");
-const choice = readline.question("Do you go to the 'mountains' or the 'village'?");
 
-if (choice === "mountains" && hasTorch) {
-  console.log("You safely navigate through the dark mountains.");
-} else if (choice === "mountains" && !hasTorch) {
-  console.log("It's too dark to proceed. You decide to turn back.");
-} else if (choice === "village" || hasMap) {
-  console.log("You find your way to the village.");
-} else {
-  console.log("You get lost and wander aimlessly.");
+const choice = readline.question("Do you go to the 'mountains' or the 'village'?");
+const Torch = readline.question("Do you have Torch.Enter Y for 'yes' N for 'No' ");
+if (Torch.toUpperCase() === 'N') {
+    hasTorch = false;
 }
 
-/* 
 
-Add Customization and expand the game:
-  - Add more choices and scenarios.
-  - Include additional items (e.g., a sword, a compass).
-  - Use nested conditionals and logical operators to create complex outcomes.
+if (choice.toLowerCase() === "mountains" && hasTorch) {
+    console.log("You safely navigate through the dark mountains.");
+    const Sword = readline.question("Do you have Sword.Enter Y for 'yes' N for 'No'");
+    const mountainsChoice = readline.question("You encounter a wild animal. Do you 'fight' or 'run'? ");
+    
+    if (Sword.toUpperCase() === 'N') {
+        hasSword = false;
+    }
+    if (mountainsChoice.toLowerCase() === "fight" && hasSword) {
+        console.log("You draw your sword and defeat the animal!");
+    } else if (mountainsChoice.toLowerCase() === "fight" && !hasSword) {
+        console.log("You try to fight with your bare hands, but you're defeated!");
+    } else {
+        console.log("You run away safely, but you're exhausted.");
+    }
+}
 
-*/
+ else if (choice.toLowerCase() === "mountains" && !hasTorch) {
+    console.log("It's too dark to proceed. You decide to turn back.");
+}
+else if (choice.toLowerCase() === "village" || hasMap) {
+
+    let Compass = readline.question("Do you have Compass.Enter Y for 'yes' N for 'No'");
+
+    if (Compass.toUpperCase() === 'N') {
+        hasCompass = false;
+
+     }
+    if (hasCompass) {
+        console.log("You find your way to the village.");
+    } else {
+        console.log("You can not decide the direction");
+    }
+}
+else {
+    console.log("You get lost and wander aimlessly.");
+}
+
